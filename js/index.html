@@ -1,0 +1,467 @@
+<!doctype html>
+<html lang="id">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width,initial-scale=1" />
+  <title>Senja Coffee - Lokal</title>
+
+  <!-- Tailwind CDN -->
+  <script src="https://cdn.tailwindcss.com"></script>
+
+  <!-- Lucide icons CDN -->
+  <script src="https://unpkg.com/lucide@0.257.0/dist/lucide.min.js"></script>
+
+  <style>
+    @keyframes slide-in-right { from { transform: translateX(100%); } to { transform: translateX(0); } }
+    .animate-slide-in-right { animation: slide-in-right 0.35s ease-out; }
+    @keyframes fade-in-down { from { opacity: 0; transform: translateY(-8px); } to { opacity: 1; transform: translateY(0); } }
+    .animate-fade-in-down { animation: fade-in-down 0.25s ease-out; }
+  </style>
+</head>
+<body class="font-sans text-gray-800 antialiased selection:bg-[#D4A373] selection:text-white">
+
+  <nav id="navbar" class="fixed w-full z-50 transition-all duration-300 bg-transparent py-6">
+    <div class="container mx-auto px-6 flex justify-between items-center">
+      <div id="brand" class="flex items-center gap-2 cursor-pointer group">
+        <div class="bg-[#D4A373] p-2 rounded-lg group-hover:rotate-12 transition">
+          <i data-lucide="coffee" class="text-[#2C1810]"></i>
+        </div>
+        <span id="brand-text" class="text-2xl font-bold font-serif tracking-widest text-white">
+          SENJA<span class="text-[#D4A373]">COFFEE</span>
+        </span>
+      </div>
+
+      <div id="desktop-nav" class="hidden md:flex space-x-8">
+        <button data-page="home" class="nav-btn text-sm font-bold uppercase tracking-wider transition-all hover:text-[#D4A373] relative group text-white/90">Beranda</button>
+        <button data-page="history" class="nav-btn text-sm font-bold uppercase tracking-wider transition-all hover:text-[#D4A373] relative group text-white/90">Sejarah</button>
+        <button data-page="about" class="nav-btn text-sm font-bold uppercase tracking-wider transition-all hover:text-[#D4A373] relative group text-white/90">Tentang & Kru</button>
+        <button data-page="products" class="nav-btn text-sm font-bold uppercase tracking-wider transition-all hover:text-[#D4A373] relative group text-white/90">Menu</button>
+        <button data-page="feedback" class="nav-btn text-sm font-bold uppercase tracking-wider transition-all hover:text-[#D4A373] relative group text-white/90">Saran</button>
+      </div>
+
+      <div class="flex items-center gap-4">
+        <button id="cart-btn" class="relative p-2 rounded-full text-white hover:bg-black/20 transition">
+          <i data-lucide="shopping-bag"></i>
+          <span id="cart-count" class="hidden absolute top-0 right-0 bg-red-500 text-white text-[10px] font-bold w-4 h-4 rounded-full flex items-center justify-center"></span>
+        </button>
+
+        <button id="mobile-menu-toggle" class="md:hidden text-white">
+          <i data-lucide="menu"></i>
+        </button>
+      </div>
+    </div>
+
+    <div id="mobile-menu" class="hidden absolute top-full left-0 w-full bg-[#2C1810] border-t border-[#D4A373]/20 p-6 md:hidden shadow-xl animate-fade-in-down">
+      <div class="flex flex-col space-y-4">
+        <button data-page="home" class="mobile-nav-btn text-left py-3 px-4 rounded-lg hover:bg-[#D4A373] hover:text-[#2C1810] text-[#F5E6D3] font-medium transition flex justify-between items-center">Beranda <i data-lucide="chevron-right" class="ml-2"></i></button>
+        <button data-page="history" class="mobile-nav-btn text-left py-3 px-4 rounded-lg hover:bg-[#D4A373] hover:text-[#2C1810] text-[#F5E6D3] font-medium transition flex justify-between items-center">Sejarah Kopi <i data-lucide="chevron-right" class="ml-2"></i></button>
+        <button data-page="about" class="mobile-nav-btn text-left py-3 px-4 rounded-lg hover:bg-[#D4A373] hover:text-[#2C1810] text-[#F5E6D3] font-medium transition flex justify-between items-center">Tentang & Kru <i data-lucide="chevron-right" class="ml-2"></i></button>
+        <button data-page="products" class="mobile-nav-btn text-left py-3 px-4 rounded-lg hover:bg-[#D4A373] hover:text-[#2C1810] text-[#F5E6D3] font-medium transition flex justify-between items-center">Menu & Order <i data-lucide="chevron-right" class="ml-2"></i></button>
+        <button data-page="feedback" class="mobile-nav-btn text-left py-3 px-4 rounded-lg hover:bg-[#D4A373] hover:text-[#2C1810] text-[#F5E6D3] font-medium transition flex justify-between items-center">Kritik & Saran <i data-lucide="chevron-right" class="ml-2"></i></button>
+      </div>
+    </div>
+  </nav>
+
+  <main id="main-content" class="pt-24">
+
+    <section id="page-home" class="min-h-screen relative flex items-center justify-center text-center px-4 pt-16">
+      <div class="absolute inset-0 bg-black/30 z-10"></div>
+      <div class="absolute inset-0 bg-cover bg-center z-0" style="background-image: url('images/bg_home.jpg')"></div>
+      <div class="relative z-20 max-w-4xl mx-auto text-[#F5E6D3]">
+        <h2 class="text-xl md:text-2xl font-light tracking-[0.3em] mb-4 uppercase text-[#D4A373]">Selamat Datang di</h2>
+        <h1 class="text-5xl md:text-7xl font-bold font-serif mb-6 leading-tight text-white drop-shadow-lg">SENJA <span class="text-[#D4A373]">COFFEE</span></h1>
+        <p class="text-lg md:text-xl mb-10 max-w-2xl mx-auto font-light text-gray-200">"Menyajikan lebih dari sekadar kopi, kami menyajikan cerita dalam setiap cangkir yang Anda nikmati bersama kehangatan suasana."</p>
+        <button id="order-now" class="bg-[#D4A373] text-[#2C1810] px-8 py-4 rounded-full font-bold text-lg hover:bg-[#C29263] transition transform hover:scale-105 shadow-xl flex items-center mx-auto gap-2">
+          <i data-lucide="shopping-bag"></i> Pesan Sekarang
+        </button>
+      </div>
+    </section>
+
+    <section id="page-history" class="hidden min-h-screen pt-24 px-4 pb-12 relative flex items-center">
+      <div class="absolute inset-0 bg-black/40 z-10"></div>
+      <div class="absolute inset-0 bg-cover bg-center z-0" style="background-image: url('images/bg_history.jpg')"></div>
+      <div class="relative z-20 container mx-auto max-w-5xl">
+        <div class="bg-[#2C1810]/90 backdrop-blur-md p-8 md:p-12 rounded-xl shadow-2xl border border-[#D4A373]/30 text-[#F5E6D3]">
+          <div class="flex items-center gap-4 mb-6">
+            <div class="w-12 h-1 bg-[#D4A373]"></div>
+            <h2 class="text-3xl md:text-4xl font-serif text-white">Sejarah Kopi Singkat</h2>
+          </div>
+          <div class="grid md:grid-cols-2 gap-8 items-center">
+            <div class="space-y-4 text-justify leading-relaxed text-gray-300">
+              <p>Kopi pertama kali ditemukan di Ethiopia pada abad ke-9. Legenda mengatakan seorang penggembala kambing bernama <strong>Kaldi</strong> memperhatikan kambingnya menjadi sangat energik setelah memakan buah beri merah tertentu.</p>
+              <p>Biji kopi kemudian menyebar ke semenanjung Arab, di mana budaya minum kopi mulai berkembang pesat. Pada abad ke-15, kopi mulai dibudidayakan di Yaman dan pada abad ke-16 dikenal di Persia, Mesir, Suriah, dan Turki.</p>
+              <p>Kini, kopi bukan hanya sekadar minuman penahan kantuk, melainkan sebuah gaya hidup dan seni yang dinikmati jutaan orang di seluruh dunia, termasuk di <strong>Senja Coffee</strong>.</p>
+            </div>
+            <div class="relative h-64 md:h-full rounded-lg overflow-hidden border-4 border-[#D4A373]/20">
+              <img src="images/bg_history.jpg" alt="Sejarah Kopi" class="w-full h-full object-cover hover:scale-110 transition duration-700" />
+              <div class="absolute bottom-0 left-0 bg-black/60 w-full p-2 text-center text-xs text-[#D4A373]">Ilustrasi Pengolahan Kopi Tradisional</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section id="page-about" class="hidden min-h-screen pt-24 pb-12 relative">
+      <div class="absolute inset-0 bg-[#1a110d]/70 z-10"></div>
+      <div class="absolute inset-0 bg-cover bg-center z-0" style="background-image: url('images/bg_about.jpg')"></div>
+
+      <div class="relative z-20 container mx-auto px-4 space-y-16">
+        <section class="bg-[#F5E6D3] text-[#2C1810] p-8 md:p-12 rounded-2xl shadow-xl flex flex-col md:flex-row gap-8 items-center">
+          <div class="md:w-1/2">
+            <h2 class="text-4xl font-serif font-bold mb-4 border-b-4 border-[#2C1810] inline-block pb-2">Tentang Senja Coffee</h2>
+            <p class="text-lg leading-relaxed mb-4">Senja Coffee didirikan dengan semangat untuk menghadirkan pengalaman ngopi yang autentik bagi komunitas lokal. Kami percaya bahwa setiap cangkir kopi memiliki ceritanya sendiri, mulai dari petani hingga ke tangan barista kami.</p>
+            <p class="text-lg leading-relaxed font-semibold italic">"Tempat di mana rasa bertemu dengan suasana, menciptakan kenangan yang tak terlupakan."</p>
+          </div>
+          <div class="md:w-1/2 w-full h-64 md:h-80 rounded-xl overflow-hidden shadow-lg">
+            <img src="images/shop_profile.jpg" alt="Profil Toko" class="w-full h-full object-cover" />
+          </div>
+        </section>
+
+        <section>
+          <div class="text-center mb-10">
+            <h2 class="text-4xl font-serif font-bold text-[#F5E6D3] mb-2">Bertemu Tim Kami</h2>
+            <p class="text-[#D4A373]">Wajah-wajah di balik kopi nikmat Anda</p>
+          </div>
+
+          <div class="grid md:grid-cols-3 gap-8">
+            <div class="bg-white rounded-xl overflow-hidden shadow-2xl transform hover:-translate-y-2 transition duration-300 group">
+              <div class="h-64 overflow-hidden relative">
+                <div class="absolute inset-0 bg-[#2C1810]/0 group-hover:bg-[#2C1810]/20 transition z-10"></div>
+                <img src="images/crew1.jpg" alt="Meilan" class="w-full h-full object-cover group-hover:scale-110 transition duration-500" />
+              </div>
+              <div class="p-6 text-center">
+                <h3 class="text-xl font-bold text-[#2C1810]">Meilan putri</h3>
+                <p class="text-[#D4A373] font-medium uppercase text-sm tracking-wider mb-3">Head Barista</p>
+                <p class="text-gray-500 italic text-sm">"Menyeduh dengan hati."</p>
+              </div>
+            </div>
+
+            <div class="bg-white rounded-xl overflow-hidden shadow-2xl transform hover:-translate-y-2 transition duration-300 group">
+              <div class="h-64 overflow-hidden relative">
+                <div class="absolute inset-0 bg-[#2C1810]/0 group-hover:bg-[#2C1810]/20 transition z-10"></div>
+                <img src="images/crew2.jpg" alt="Ismail" class="w-full h-full object-cover group-hover:scale-110 transition duration-500" />
+              </div>
+              <div class="p-6 text-center">
+                <h3 class="text-xl font-bold text-[#2C1810]">Ismail</h3>
+                <p class="text-[#D4A373] font-medium uppercase text-sm tracking-wider mb-3">Store Manager</p>
+                <p class="text-gray-500 italic text-sm">"Pelayanan adalah kunci."</p>
+              </div>
+            </div>
+
+            <div class="bg-white rounded-xl overflow-hidden shadow-2xl transform hover:-translate-y-2 transition duration-300 group">
+              <div class="h-64 overflow-hidden relative">
+                <div class="absolute inset-0 bg-[#2C1810]/0 group-hover:bg-[#2C1810]/20 transition z-10"></div>
+                <img src="images/crew3.jpg" alt="D Monkey" class="w-full h-full object-cover group-hover:scale-110 transition duration-500" />
+              </div>
+              <div class="p-6 text-center">
+                <h3 class="text-xl font-bold text-[#2C1810]">D Monkey</h3>
+                <p class="text-[#D4A373] font-medium uppercase text-sm tracking-wider mb-3">Roaster</p>
+                <p class="text-gray-500 italic text-sm">"Kualitas biji nomor satu."</p>
+              </div>
+            </div>
+          </div>
+        </section>
+      </div>
+    </section>
+
+    <section id="page-products" class="hidden min-h-screen pt-24 pb-12 relative">
+      <div class="absolute inset-0 bg-[#2C1810]/90 z-10"></div>
+      <div class="absolute inset-0 bg-cover bg-center z-0" style="background-image: url('images/bg_menu.jpg')"></div>
+
+      <div class="relative z-20 container mx-auto px-4">
+        <div class="text-center mb-12">
+          <h2 class="text-4xl md:text-5xl font-serif font-bold text-[#F5E6D3] mb-4">Menu Spesial</h2>
+          <p class="text-gray-300 max-w-2xl mx-auto">Pilih minuman atau makanan favoritmu dan pesan langsung dari sini. Kami akan menyiapkannya dengan penuh cinta.</p>
+        </div>
+
+        <div id="products-grid" class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8"></div>
+      </div>
+    </section>
+
+    <section id="page-feedback" class="hidden min-h-screen pt-24 pb-12 relative flex items-center justify-center">
+      <div class="absolute inset-0 bg-black/60 z-10"></div>
+      <div class="absolute inset-0 bg-cover bg-center z-0" style="background-image: url('images/bg_feedback.jpg')"></div>
+
+      <div class="relative z-20 container mx-auto px-4 max-w-2xl">
+        <div class="bg-white/10 backdrop-blur-lg border border-white/20 p-8 md:p-12 rounded-2xl shadow-2xl text-white">
+          <div class="text-center mb-8">
+            <i data-lucide="message-square" class="mx-auto text-[#D4A373] mb-4" style="width:48px;height:48px"></i>
+            <h2 class="text-3xl font-serif font-bold">Kritik & Saran</h2>
+            <p class="text-gray-200 mt-2">Bantu kami menjadi lebih baik dengan masukan Anda.</p>
+          </div>
+
+          <form id="feedback-form" class="space-y-6">
+            <div>
+              <label class="block text-sm font-medium mb-2 text-[#D4A373]">Nama Lengkap</label>
+              <input type="text" id="fb-name" class="w-full bg-white/20 border border-white/30 rounded-lg p-3 text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-[#D4A373]" placeholder="Nama Anda" required />
+            </div>
+            <div>
+              <label class="block text-sm font-medium mb-2 text-[#D4A373]">Email</label>
+              <input type="email" id="fb-email" class="w-full bg-white/20 border border-white/30 rounded-lg p-3 text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-[#D4A373]" placeholder="email@contoh.com" required />
+            </div>
+            <div>
+              <label class="block text-sm font-medium mb-2 text-[#D4A373]">Pesan Anda</label>
+              <textarea id="fb-message" rows="4" class="w-full bg-white/20 border border-white/30 rounded-lg p-3 text-white placeholder-gray-300 focus:outline-none focus:ring-2 focus:ring-[#D4A373]" placeholder="Tuliskan kritik dan saran Anda di sini..." required></textarea>
+            </div>
+            <button type="submit" class="w-full bg-[#D4A373] text-[#2C1810] font-bold py-3 rounded-lg hover:bg-[#C29263] transition flex justify-center items-center gap-2">
+              <i data-lucide="send"></i> Kirim Masukan
+            </button>
+          </form>
+        </div>
+      </div>
+    </section>
+
+  </main>
+
+  <footer class="bg-[#1a110d] text-gray-400 py-12 border-t border-[#2C1810]">
+    <div class="container mx-auto px-4">
+      <div class="grid md:grid-cols-3 gap-8 mb-8">
+        <div>
+          <h3 class="text-2xl font-serif text-[#F5E6D3] mb-4">Senja Coffee</h3>
+          <p class="text-sm leading-relaxed mb-4">Menghadirkan kopi terbaik dari biji pilihan untuk menemani setiap momen berharga Anda.</p>
+          <div class="flex gap-4">
+            <i data-lucide="instagram" class="hover:text-[#D4A373] cursor-pointer"></i>
+            <i data-lucide="phone" class="hover:text-[#D4A373] cursor-pointer"></i>
+            <i data-lucide="map-pin" class="hover:text-[#D4A373] cursor-pointer"></i>
+          </div>
+        </div>
+        <div>
+          <h4 class="text-white font-bold mb-4 uppercase tracking-wider">Jam Buka</h4>
+          <ul class="text-sm space-y-2">
+            <li class="flex justify-between border-b border-gray-800 pb-2"><span>Senin - Jumat</span> <span>08:00 - 22:00</span></li>
+            <li class="flex justify-between border-b border-gray-800 pb-2"><span>Sabtu</span> <span>09:00 - 23:00</span></li>
+            <li class="flex justify-between border-b border-gray-800 pb-2"><span>Minggu</span> <span>09:00 - 21:00</span></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="text-white font-bold mb-4 uppercase tracking-wider">Lokasi</h4>
+          <p class="text-sm mb-2">Jl. W.R. Supratman, Kandang Limun, Kecamatan Muara Bangkahulu</p>
+          <p class="text-sm mb-2">Bengkulu, 38122</p>
+          <button class="mt-4 text-[#D4A373] border border-[#D4A373] px-4 py-2 rounded text-sm hover:bg-[#D4A373] hover:text-[#2C1810] transition">Lihat di Google Maps</button>
+        </div>
+      </div>
+      <div class="text-center text-xs pt-8 border-t border-gray-800">&copy; 2024 Senja Coffee. All rights reserved. Designed for UMKM.</div>
+    </div>
+  </footer>
+
+  <div id="cart-modal" class="fixed inset-0 z-[60] hidden">
+    <div id="cart-backdrop" class="absolute inset-0 bg-black/60 backdrop-blur-sm"></div>
+    <div class="relative w-full max-w-md bg-[#FAF7F2] h-full shadow-2xl flex flex-col animate-slide-in-right ml-auto">
+      <div class="p-6 bg-[#2C1810] text-[#F5E6D3] flex justify-between items-center shadow-md">
+        <div class="flex items-center gap-3">
+          <i data-lucide="shopping-bag"></i>
+          <h2 class="text-xl font-bold">Keranjang Anda</h2>
+        </div>
+        <button id="cart-close" class="hover:text-red-400 transition"><i data-lucide="x"></i></button>
+      </div>
+
+      <div id="cart-items" class="flex-1 overflow-y-auto p-4 space-y-4"></div>
+
+      <div id="cart-footer" class="p-6 bg-white border-t border-gray-200 hidden">
+        <div class="flex justify-between mb-4 text-lg font-bold text-[#2C1810]">
+          <span>Total</span>
+          <span id="cart-total">Rp 0</span>
+        </div>
+        <button id="checkout-btn" class="w-full bg-[#25D366] text-white py-3 rounded-lg font-bold hover:bg-[#128C7E] transition shadow-lg flex justify-center items-center gap-2">
+          <i data-lucide="phone"></i> Pesan Sekarang
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    document.addEventListener('DOMContentLoaded', function () { if (window.lucide) lucide.replace(); });
+
+    const products = [
+      { id: 1, name: "Gayo Arabica", price: 28000, category: "Manual Brew", image: "images/product1.jpg", desc: "Kopi Aceh Gayo dengan notes fruity dan acidity seimbang." },
+      { id: 2, name: "Caramel Latte", price: 32000, category: "Espresso Base", image: "images/product2.jpg", desc: "Espresso, susu segar, dan saus karamel homemade." },
+      { id: 3, name: "Iced Palm Sugar", price: 25000, category: "Signature", image: "images/product3.jpg", desc: "Kopi susu kekinian dengan gula aren asli yang legit." },
+      { id: 4, name: "Matcha Latte", price: 30000, category: "Non-Coffee", image: "images/product4.jpg", desc: "Pure matcha Jepang dipadu dengan susu creamy." },
+      { id: 5, name: "Butter Croissant", price: 22000, category: "Pastry", image: "images/product5.jpg", desc: "Renya, bermentega, dan dipanggang fresh setiap pagi." },
+      { id: 6, name: "Choco Muffin", price: 20000, category: "Pastry", image: "images/product6.jpg", desc: "Muffin cokelat lumer yang sempurna untuk teman ngopi." }
+    ];
+
+    let activePage = 'home';
+    let cart = [];
+
+    const pages = {
+      home: document.getElementById('page-home'),
+      history: document.getElementById('page-history'),
+      about: document.getElementById('page-about'),
+      products: document.getElementById('page-products'),
+      feedback: document.getElementById('page-feedback')
+    };
+    const productsGrid = document.getElementById('products-grid');
+    const cartBtn = document.getElementById('cart-btn');
+    const cartModal = document.getElementById('cart-modal');
+    const cartBackdrop = document.getElementById('cart-backdrop');
+    const cartClose = document.getElementById('cart-close');
+    const cartItemsEl = document.getElementById('cart-items');
+    const cartFooter = document.getElementById('cart-footer');
+    const cartTotalEl = document.getElementById('cart-total');
+    const cartCountEl = document.getElementById('cart-count');
+    const checkoutBtn = document.getElementById('checkout-btn');
+    const feedbackForm = document.getElementById('feedback-form');
+
+    function showPage(pageId) {
+      activePage = pageId;
+      Object.keys(pages).forEach(k => pages[k].classList.toggle('hidden', k !== pageId));
+      document.getElementById('mobile-menu').classList.add('hidden');
+      document.querySelectorAll('.nav-btn').forEach(btn => btn.classList.toggle('text-[#D4A373]', btn.dataset.page === pageId));
+    }
+
+    function renderProducts() {
+      productsGrid.innerHTML = '';
+      products.forEach(product => {
+        const card = document.createElement('div');
+        card.className = 'bg-[#FAF7F2] rounded-2xl overflow-hidden shadow-lg group hover:shadow-2xl transition-all duration-300 flex flex-col';
+        card.innerHTML = `
+          <div class="relative h-64 overflow-hidden">
+            <img src="${product.image}" alt="${product.name}" class="w-full h-full object-cover group-hover:scale-110 transition duration-500" />
+            <div class="absolute top-4 right-4 bg-white/90 backdrop-blur px-3 py-1 rounded-full text-xs font-bold text-[#2C1810] uppercase tracking-wide">${product.category}</div>
+          </div>
+          <div class="p-6 flex-1 flex flex-col">
+            <div class="flex justify-between items-start mb-2">
+              <h3 class="text-xl font-bold text-[#2C1810] font-serif">${product.name}</h3>
+              <span class="text-[#D4A373] font-bold text-lg">Rp ${Math.round(product.price/1000)}k</span>
+            </div>
+            <p class="text-gray-500 text-sm mb-6 flex-1">${product.desc}</p>
+            <button data-id="${product.id}" class="add-to-cart w-full bg-[#2C1810] text-[#F5E6D3] py-3 rounded-lg font-bold hover:bg-[#D4A373] hover:text-[#2C1810] transition flex justify-center items-center gap-2">
+              <i data-lucide="shopping-bag"></i> Tambah ke Keranjang
+            </button>
+          </div>
+        `;
+        productsGrid.appendChild(card);
+      });
+      if (window.lucide) lucide.replace();
+    }
+
+    function updateCartCount() {
+      const totalQty = cart.reduce((s, it) => s + it.quantity, 0);
+      if (totalQty > 0) {
+        cartCountEl.textContent = totalQty;
+        cartCountEl.classList.remove('hidden');
+      } else {
+        cartCountEl.classList.add('hidden');
+      }
+    }
+
+    function openCart() { cartModal.classList.remove('hidden'); renderCart(); }
+    function closeCart() { cartModal.classList.add('hidden'); }
+
+    function addToCart(productId) {
+      const prod = products.find(p => p.id === productId);
+      if (!prod) return;
+      const existing = cart.find(i => i.id === productId);
+      if (existing) existing.quantity += 1; else cart.push({ ...prod, quantity: 1 });
+      updateCartCount(); openCart();
+    }
+
+    function updateQty(id, delta) {
+      cart = cart.map(item => item.id === id ? { ...item, quantity: Math.max(1, item.quantity + delta) } : item);
+      renderCart(); updateCartCount();
+    }
+
+    function removeItem(id) { cart = cart.filter(i => i.id !== id); renderCart(); updateCartCount(); }
+
+    function renderCart() {
+      cartItemsEl.innerHTML = '';
+      if (cart.length === 0) {
+        cartItemsEl.innerHTML = `
+          <div class="flex flex-col items-center justify-center h-full text-gray-400 space-y-4">
+            <i data-lucide="shopping-bag" style="width:64px;height:64px;opacity:.3"></i>
+            <p>Keranjang masih kosong.</p>
+            <button id="see-menu" class="text-[#2C1810] font-bold underline">Lihat Menu</button>
+          </div>
+        `;
+        cartFooter.classList.add('hidden');
+        if (window.lucide) lucide.replace();
+        document.getElementById('see-menu')?.addEventListener('click', () => { closeCart(); showPage('products'); });
+        return;
+      }
+
+      cart.forEach(item => {
+        const itemEl = document.createElement('div');
+        itemEl.className = 'bg-white p-3 rounded-lg shadow-sm border border-gray-200 flex gap-4';
+        itemEl.innerHTML = `
+          <img src="${item.image}" alt="${item.name}" class="w-20 h-20 object-cover rounded-md" />
+          <div class="flex-1">
+            <h4 class="font-bold text-[#2C1810]">${item.name}</h4>
+            <p class="text-[#D4A373] text-sm font-semibold">Rp ${item.price.toLocaleString('id-ID')}</p>
+            <div class="flex items-center gap-3 mt-2">
+              <button data-action="dec" data-id="${item.id}" class="w-6 h-6 bg-gray-200 rounded flex items-center justify-center hover:bg-gray-300"><i data-lucide="minus" style="width:14px;height:14px"></i></button>
+              <span class="text-sm font-bold">${item.quantity}</span>
+              <button data-action="inc" data-id="${item.id}" class="w-6 h-6 bg-[#2C1810] text-white rounded flex items-center justify-center hover:bg-[#4a2c20]"><i data-lucide="plus" style="width:14px;height:14px"></i></button>
+            </div>
+          </div>
+          <button data-action="remove" data-id="${item.id}" class="text-gray-400 hover:text-red-500 self-start"><i data-lucide="trash-2"></i></button>
+        `;
+        cartItemsEl.appendChild(itemEl);
+      });
+
+      const totalPrice = cart.reduce((sum, it) => sum + it.price * it.quantity, 0);
+      cartTotalEl.textContent = 'Rp ' + totalPrice.toLocaleString('id-ID');
+      cartFooter.classList.remove('hidden');
+      if (window.lucide) lucide.replace();
+
+      cartItemsEl.querySelectorAll('[data-action]').forEach(btn => {
+        btn.addEventListener('click', () => {
+          const action = btn.getAttribute('data-action');
+          const id = parseInt(btn.getAttribute('data-id'), 10);
+          if (action === 'dec') updateQty(id, -1);
+          if (action === 'inc') updateQty(id, 1);
+          if (action === 'remove') removeItem(id);
+        });
+      });
+    }
+
+    document.querySelectorAll('.nav-btn').forEach(btn => btn.addEventListener('click', () => showPage(btn.dataset.page)));
+    document.querySelectorAll('.mobile-nav-btn').forEach(btn => btn.addEventListener('click', () => showPage(btn.dataset.page)));
+
+    document.getElementById('mobile-menu-toggle').addEventListener('click', () => {
+      const mobileMenu = document.getElementById('mobile-menu');
+      mobileMenu.classList.toggle('hidden');
+      const icon = document.getElementById('mobile-menu-toggle').querySelector('i');
+      if (icon) { icon.setAttribute('data-lucide', mobileMenu.classList.contains('hidden') ? 'menu' : 'x'); if (window.lucide) lucide.replace(); }
+    });
+
+    document.getElementById('order-now').addEventListener('click', () => showPage('products'));
+    document.getElementById('brand').addEventListener('click', () => showPage('home'));
+
+    document.addEventListener('click', (e) => {
+      const addBtn = e.target.closest('.add-to-cart');
+      if (addBtn) addToCart(parseInt(addBtn.getAttribute('data-id'), 10));
+    });
+
+    cartBtn.addEventListener('click', openCart);
+    cartClose.addEventListener('click', closeCart);
+    cartBackdrop.addEventListener('click', closeCart);
+
+    checkoutBtn?.addEventListener('click', () => {
+      const totalPrice = cart.reduce((sum, it) => sum + it.price * it.quantity, 0);
+      const text = `Pesanan: ${cart.map(i => i.name + ' x' + i.quantity).join(', ')}. Total: Rp ${totalPrice.toLocaleString('id-ID')}`;
+      alert('Pesanan Berhasil!. ' + text);
+    });
+
+    feedbackForm?.addEventListener('submit', (e) => { e.preventDefault(); alert('Terima kasih atas masukan Anda!'); feedbackForm.reset(); });
+
+    window.addEventListener('scroll', () => {
+      const navbar = document.getElementById('navbar');
+      const brandText = document.getElementById('brand-text');
+      if (window.scrollY > 50) {
+        navbar.classList.add('bg-[#2C1810]', 'shadow-lg', 'py-3'); navbar.classList.remove('bg-transparent', 'py-6');
+        brandText.classList.remove('text-white'); brandText.classList.add('text-[#F5E6D3]');
+      } else {
+        navbar.classList.remove('bg-[#2C1810]', 'shadow-lg', 'py-3'); navbar.classList.add('bg-transparent', 'py-6');
+        brandText.classList.remove('text-[#F5E6D3]'); brandText.classList.add('text-white');
+      }
+    });
+
+    renderProducts(); updateCartCount(); showPage('home');
+
+    const observer = new MutationObserver(() => { if (window.lucide) lucide.replace(); });
+    observer.observe(document.body, { childList: true, subtree: true });
+  </script>
+  
+</body>
+</html>
